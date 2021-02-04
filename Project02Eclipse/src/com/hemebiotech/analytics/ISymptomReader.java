@@ -19,4 +19,5 @@ public interface ISymptomReader {
 	 */
 	
 	TreeMap<String, Integer> GetSymptoms ();
+	List<String> GetSymptomsList ();
 }

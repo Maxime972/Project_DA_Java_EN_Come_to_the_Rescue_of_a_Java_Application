@@ -2,8 +2,10 @@ package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 /**
  * 
  * @author Maxime
@@ -11,32 +13,57 @@ import java.util.TreeMap;
  */
 
 public class AnalyticsCounter {
-	
+
 	TreeMap<String, Integer> resultat = new TreeMap<String, Integer>();
+
+	ReadSymptomDataFromFile rs = new ReadSymptomDataFromFile("symptoms.txt");
 	
 	public void readSortSymptoms() {
-		
-		ReadSymptomDataFromFile rs = new ReadSymptomDataFromFile("symptoms.txt");
 
 		resultat = rs.GetSymptoms();
-		
+
 	}
 	
+	public void readListSortSymptoms() {
+		List<String> resultList = rs.GetSymptomsList();
+		TreeMap<String, Integer> resultatTreeList = new TreeMap<String, Integer>();
+		
+		for (String symptomes : resultList) {
+			
+			if(resultatTreeList.containsKey(symptomes)) {
+				
+				int value = resultatTreeList.get(symptomes) + 1;
+				resultatTreeList.put(symptomes, value);
+				
+			} else {
+				
+				resultatTreeList.put(symptomes, 1);
+				
+			}
+			
+			
+		}
+		for (Map.Entry<String, Integer> element : resultatTreeList.entrySet()) {
+			System.out.println(element.getKey() + " = " + element.getValue());
+			
+		}
+
+	}
+
 	public void writeSymptoms() {
 		FileWriter writer;
 		try {
-			writer = new FileWriter ("result.out");
+			writer = new FileWriter("result.out");
 			for (Map.Entry<String, Integer> element : resultat.entrySet()) {
-				System.out.println(element.getKey() + " = " + element.getValue());
+				//System.out.println(element.getKey() + " = " + element.getValue());
 				writer.write(element.getKey() + " = " + element.getValue() + "\n");
 			}
 			writer.close();
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 
