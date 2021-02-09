@@ -22,12 +22,14 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * @param filepath a full or partial path to file with symptom strings in it,
 	 *                 one per line
 	 */
+	
 	public ReadSymptomDataFromFile(String filepath) {
 		this.filepath = filepath;
 	}
 
 	@Override
 	public TreeMap<String, Integer> GetSymptoms() {
+		
 		TreeMap<String, Integer> resultat = new TreeMap<String, Integer>();
 
 		if (filepath != null) {
@@ -76,9 +78,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		
+		}	
 		return result;
 	}
-
 }

@@ -15,18 +15,16 @@ import java.util.TreeMap;
 public class AnalyticsCounter {
 
 	TreeMap<String, Integer> resultat = new TreeMap<String, Integer>();
-
+	TreeMap<String, Integer> resultatTreeList = new TreeMap<String, Integer>();
+	
 	ReadSymptomDataFromFile rs = new ReadSymptomDataFromFile("symptoms.txt");
 	
 	public void readSortSymptoms() {
-
 		resultat = rs.GetSymptoms();
-
 	}
 	
 	public void readListSortSymptoms() {
 		List<String> resultList = rs.GetSymptomsList();
-		TreeMap<String, Integer> resultatTreeList = new TreeMap<String, Integer>();
 		
 		for (String symptomes : resultList) {
 			
@@ -36,29 +34,39 @@ public class AnalyticsCounter {
 				resultatTreeList.put(symptomes, value);
 				
 			} else {
-				
-				resultatTreeList.put(symptomes, 1);
-				
+				resultatTreeList.put(symptomes, 1);	
 			}
-			
-			
-		}
-		for (Map.Entry<String, Integer> element : resultatTreeList.entrySet()) {
-			System.out.println(element.getKey() + " = " + element.getValue());
 			
 		}
 
 	}
-
+	
 	public void writeSymptoms() {
 		FileWriter writer;
 		try {
 			writer = new FileWriter("result.out");
 			for (Map.Entry<String, Integer> element : resultat.entrySet()) {
-				//System.out.println(element.getKey() + " = " + element.getValue());
+				System.out.println(element.getKey() + " = " + element.getValue());
 				writer.write(element.getKey() + " = " + element.getValue() + "\n");
 			}
 			writer.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void writeSymptomsList() {
+		FileWriter writerList;
+		try {
+			writerList = new FileWriter("resultList.out");
+			for (Map.Entry<String, Integer> element : resultatTreeList.entrySet()) {
+				System.out.println("(List) " + element.getKey() + " = " + element.getValue());
+				writerList.write(element.getKey() + " = " + element.getValue() + "\n");
+			}
+			writerList.close();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
