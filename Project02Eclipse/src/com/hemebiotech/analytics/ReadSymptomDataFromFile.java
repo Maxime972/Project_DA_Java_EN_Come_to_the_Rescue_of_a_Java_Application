@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+
 /**
- * Simple brute force implementation
+ * Lecture d'un fichier texte externe et création d'un TreeMap
+ * @author Maxime
  *
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
@@ -18,6 +20,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	private String filepath;
 
 	/**
+	 * Constructeur ReadSymptomDataFromFile
 	 * 
 	 * @param filepath a full or partial path to file with symptom strings in it,
 	 *                 one per line
@@ -27,6 +30,12 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		this.filepath = filepath;
 	}
 
+	/**
+	 * La méthode getSymptoms
+	 * 
+	 * @exception IOException Si la connexion établie a été abandonnée.
+	 * @return Une collection "<em>resultat</em>" avec les symptômes triés par ordre alphabétique avec leur nombre d'occurrence
+	 */
 	@Override
 	public TreeMap<String, Integer> getSymptoms() {
 		
